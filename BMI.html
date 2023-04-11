@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BMI Calculator</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    
+    <div class="container">
+    
+        <div class="bmi">
+        <h1; font-size:10px><b>BMI Calculator</b></h1></div>
+        <form>
+            <div class="form-group">
+                <label for="weight"><b>Weight (in kg):</b></label>
+              <input type="range" class="form-control-range" id="weightRange" name="weightRange" min="0" max="150"
+                    step="0.1" value="1" />  
+                <span id="weightValue">1</span><br /><br />
+         
+            
+                <label for="height"><b>Height (in cm):</b></label>
+                <input type="range" class="form-control-range" id="heightRange" name="heightRange" min="0" max="250"
+                    step="0.1" value="1" />
+                <span id="heightValue">0</span><br /><br />
+            
+            </div>
+          <button type="button"  onclick="calculateBMI()"> <div class="btn1"><b>Calculate BMI</b></div> </button>
+           <div class="r"> <div id="result"></div>
+            <div id="review"></div></div>
+        </form>
+   
+  
+</div>
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // Get the weight, height range sliders, and review div
+        var weight_slider = document.getElementById("weightRange");
+        var height_slider = document.getElementById("heightRange");
+        var review = document.getElementById("review");
+
+        // Get the weight and height value elements
+        var weight_value = document.getElementById("weightValue");
+        var height_value = document.getElementById("heightValue");
+
+        // Update the weight and height value elements with the current value of the sliders
+        weight_value.innerHTML = weight_slider.value + " kg";
+        height_value.innerHTML = height_slider.value + " cm";
+
+        // Add event listeners to update the weight and height value elements when the sliders are moved
+        weight_slider.addEventListener("input", function () {
+            weight_value.innerHTML = weight_slider.value + " kg";
+        });
+
+        height_slider.addEventListener("input", function () {
+            height_value.innerHTML = height_slider.value + " cm";
+        });
+
+        // Calculate the BMI and display the result and review when the "Calculate BMI" button is clicked
+        function calculateBMI() {
+            // Get the weight and height values from the sliders
+            var weight = parseFloat(weight_slider.value);
+            var height = parseFloat(height_slider.value) / 100; // convert cm to m
+
+            // Calculate the BMI using the formula: weight / (height * height)
+            var bmi = weight / (height * height);
+
+            // Display the result
+            var result = document.getElementById("result");
+            result.innerHTML = "Your BMI is " + bmi.toFixed(2);
+
+            // Display a text review based on the user's BMI
+            if (bmi < 18.5) {
+                review.innerHTML = "You are underweight.";
+            } else if (bmi < 25) {
+                review.innerHTML = "You have a healthy weight.";
+            } else if (bmi < 30) {
+                review.innerHTML = "You are overweight.";
+            } else {
+                review.innerHTML = "You are obese.";
+            }
+        }
+
+    </script>
+    <!-- Add Bootstrap CSS and JS files -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
